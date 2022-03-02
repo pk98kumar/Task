@@ -1,1 +1,95 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+    background-color: #ecf5fa;
+};
+
+.jh-card {
+    padding: 34px 40px 24px 40px;
+    background-color: white;
+    min-height: 200px;
+    box-shadow: 0 2px 11px 0 rgba(0, 0, 0, 0.09);
+    display: inline-block;
+    width: 100%;
+    border: 0px solid white !important;
+    border-radius: 0px !important;
+    &.inner-box-header-footer {
+        padding: 0px;
+        height: 100%;
+        min-height: inherit;
+
+        .inner-box-header {
+            border-bottom: 1px solid #e9f4f9;
+            padding: 40px 20px;
+            display: inline-block;
+            width: 100%;
+            &.with-header {
+                padding: 15px 20px 20px;
+            }
+            background-color: #f2f5f8
+        }
+        .inner-box-body {
+            padding: 0px 40px 24px 40px;
+            display: inline-block;
+            width: 100%;
+        }
+        .inner-box-footer {
+            border-top: 1px solid gainsboro;
+            padding: 20px;
+            display: inline-block;
+            width: 100%;
+        }
+    }
+    .main-header {
+        font-size: 24px;
+        color: salmon;
+        margin-top: 10px;
+        margin-bottom: 0px;
+        font-weight: 600;
+    }
+    &.custom-inner-box {
+        box-shadow: none;
+
+    }
+}
+
+.table thead th{
+    font-weight: 700 !important;
+}
+.table{
+    thead {
+        background-color: aqua;
+        tr{
+            th{
+                border :1px solid #dee2e6 !important;
+                text-align: left !important;
+            }
+            th.text-center{
+                text-align: center !important;
+            }
+            th.min-width-150{
+                min-width: 150px;
+            }
+        }
+    }
+    tbody {
+        tr{
+            td{
+                border :1px solid #dee2e6 !important;
+                text-align: left !important;
+            }
+            td.text-center{
+                text-align: center !important;
+            }
+        }
+    }
+}
+.modal-header{
+    background-color: aqua;
+}
+h4{
+    color: #222e55;
+}
+p{
+    color: #7f94a1;
+}
+
