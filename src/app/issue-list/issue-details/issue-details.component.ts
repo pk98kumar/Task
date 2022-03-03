@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { Users } from 'src/app/user.modal';
 
 @Component({
   selector: 'app-issue-details',
@@ -13,13 +14,13 @@ export class IssueDetailsComponent implements OnInit {
   activatedRoute: any;
   issueId: any;
   lead: any;
-  alldata: any;
+  alldata: Users = new Users();
   searchtext: any = '';
   taskForm!: FormGroup;
   submitted = false;
   selectedData: any;
 
- data:any[]= [];
+  data: any[] = [];
 
   constructor(private route: ActivatedRoute, private fb: FormBuilder) {}
 
@@ -64,31 +65,13 @@ export class IssueDetailsComponent implements OnInit {
         pname: this.taskForm.get('pname')?.value,
         task: [task],
       };
-      // if( this.alldata.project.pname == this.taskForm.value.pname ){
-      //     this.alldata.project.task.push(task)
-      // }else{
-      //   this.alldata.project.push(project);
-      // }
-      // this.alldata.project.map((e:Task)=>{return e})
-
-      // this.alldata.project.filter((e:any)=>{
-      //   if(e.pname == this.taskForm.value.pname){
-      //     e.task.push(task);
-
-      //   }else{
-      //     this.alldata.project.push(project);
-      //   }
-      // });
-
-      // let pr = this.alldata.project.filter(
-      //   (e: any) => e.pname == this.taskForm.value.pname
-      // );
 
       let nTask = false;
+
       for (let i = 0; i < this.alldata.project.length; i++) {
         let e = this.alldata.project[i];
         if (e.pname == this.taskForm.value.pname) {
-          e.task.push(task);
+          e.task?.push(task);
           nTask = true;
         }
       }
@@ -96,62 +79,40 @@ export class IssueDetailsComponent implements OnInit {
       if (!nTask) {
         this.alldata.project.push(project);
       }
+      // for (let i = 0; i < this.allDetails.project.length; i++) {
+      //   let e = this.alldata.project[i];
+      //   if (e.pname == this.taskForm.value.pname) {
+      //     e.project?.push(project);
+      //     nTask = true;
+      //   }
+      // }
 
       localStorage.setItem('prince', JSON.stringify(this.allDetails));
 
       console.log(this.alldata.project);
     }
   }
-  result:any
+  result: any;
   onSelectChange(e: any) {
     // let i:any
-    this.data=JSON.parse(JSON.stringify(this.alldata.project));
+    this.data = JSON.parse(JSON.stringify(this.alldata.project));
     let prince = e.target.value;
-    //   let select = this.alldata.project.filter((y:any)=>{
-       
-    //     console.log(y.task[0].status)
-    //    });
-   
-  //  return this.alldata.filter((item:any) => {
-  //   return item.task.includes(e);
-       
 
-  //   });
+    if (prince != 'all') {
+      let d: any[] = this.data;
 
-    
-    // let pr:any = this.alldata.project[0].filter(e.priority);
-    // console.log(pr);
-
-//      var myTags =  this.alldata.project.filter(function(hrTag:any) {
-// 	return hrTag.task.includes(prince);
-// });
-//  console.log(myTags);
-// for (let i = 0; i < this.alldata.project.length; i++) {
-//   let sss = this.alldata.project[i];
-//   if (sss.task[i].priority == prince) {
-//     return sss
-//   }
-//   console.log(sss,"hasdhgfhggasdf");
-  
-// }
-
-if(prince != 'all'){
-let d:any[] = this.data;
-
-    d.forEach((pr:any)=>{
-      let ta:any[] = []
-     pr.task.forEach((t:any)=>{
-      if(t.priority === prince){
-        // d.push(pr);
-        ta.push(t);
-        console.log(t);
-      }
-      
-     })
-     pr.task=ta;
-   })
-   
-this.data = d;
-  } 
-}
+      d.forEach((pr: any) => {
+        let ta: any[] = [];
+        pr.task.forEach((t: any) => {
+          if (t.priority === prince) {
+            // d.push(pr);
+            ta.push(t);
+            console.log(t);
+          }
+        });
+        pr.task = ta;
+      });
+      this.data = d;
+    }
+  }
 }
