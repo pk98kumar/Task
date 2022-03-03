@@ -19,6 +19,8 @@ export class IssueDetailsComponent implements OnInit {
   submitted = false;
   selectedData: any;
 
+ data:any[]= [];
+
   constructor(private route: ActivatedRoute, private fb: FormBuilder) {}
 
   ngOnInit(): void {
@@ -45,6 +47,8 @@ export class IssueDetailsComponent implements OnInit {
     });
 
     this.selectedData = this.alldata;
+
+    this.data = JSON.parse(JSON.stringify(this.alldata.project));
   }
 
   get taskFormControl() {
@@ -98,13 +102,56 @@ export class IssueDetailsComponent implements OnInit {
       console.log(this.alldata.project);
     }
   }
-
+  result:any
   onSelectChange(e: any) {
-    console.log(e.target.value);
-    // let pr = (this.selectedData = this.alldata.filter(
-    //   (e.value))
+    // let i:any
+    this.data=JSON.parse(JSON.stringify(this.alldata.project));
+    let prince = e.target.value;
+    //   let select = this.alldata.project.filter((y:any)=>{
+       
+    //     console.log(y.task[0].status)
+    //    });
+   
+  //  return this.alldata.filter((item:any) => {
+  //   return item.task.includes(e);
+       
+
+  //   });
+
+    
     // let pr:any = this.alldata.project[0].filter(e.priority);
     // console.log(pr);
-    
-  }
+
+//      var myTags =  this.alldata.project.filter(function(hrTag:any) {
+// 	return hrTag.task.includes(prince);
+// });
+//  console.log(myTags);
+// for (let i = 0; i < this.alldata.project.length; i++) {
+//   let sss = this.alldata.project[i];
+//   if (sss.task[i].priority == prince) {
+//     return sss
+//   }
+//   console.log(sss,"hasdhgfhggasdf");
+  
+// }
+
+if(prince != 'all'){
+let d:any[] = this.data;
+
+    d.forEach((pr:any)=>{
+      let ta:any[] = []
+     pr.task.forEach((t:any)=>{
+      if(t.priority === prince){
+        // d.push(pr);
+        ta.push(t);
+        console.log(t);
+      }
+      
+     })
+     pr.task=ta;
+   })
+   
+this.data = d;
+  } 
+}
 }

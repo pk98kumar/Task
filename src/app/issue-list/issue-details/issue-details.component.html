@@ -33,6 +33,7 @@
                   </div> -->
         <div class="form-group col-md-4 float-end mx-3">
           <select class="form-select"  (change)="onSelectChange($event)">
+            <option value="all">All</option>
             <option value="Low">Low</option>
             <option value="Medium">Medium</option>
             <option value="High">High</option>
@@ -40,7 +41,7 @@
           </select>
         </div>
       </div>
-      <div class="col-md-12" *ngFor="let project of alldata.project">
+      <div class="col-md-12" *ngFor="let project of data">
         <div class="col-md-8">
           <h5>Project Name</h5>
           <p class="fw-bold">{{ project.pname }}</p>
