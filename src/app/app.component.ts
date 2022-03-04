@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { TaskDetails } from 'src/task.modal';
-import { Project } from './project.modal';
 import { Users } from './user.modal';
 
 @Component({

@@ -14,11 +14,11 @@ export class IssueDetailsComponent implements OnInit {
   activatedRoute: any;
   issueId: any;
   lead: any;
-  alldata: Users = new Users();
+  userData: Users = new Users();
   searchtext: any = '';
   taskForm!: FormGroup;
   submitted = false;
-  selectedData: any;
+  // selectedData: any;
 
   data: any[] = [];
 
@@ -42,14 +42,14 @@ export class IssueDetailsComponent implements OnInit {
 
     this.allDetails.filter((e: any) => {
       if (e.id == this.issueId) {
-        this.alldata = e;
-        console.log(this.alldata);
+        this.userData = e;
+        console.log(this.userData);
       }
     });
 
-    this.selectedData = this.alldata;
+    // this.selectedData = this.userData;
 
-    this.data = JSON.parse(JSON.stringify(this.alldata.project));
+    this.data = JSON.parse(JSON.stringify(this.userData.project)); // copy
   }
 
   get taskFormControl() {
@@ -68,8 +68,8 @@ export class IssueDetailsComponent implements OnInit {
 
       let nTask = false;
 
-      for (let i = 0; i < this.alldata.project.length; i++) {
-        let e = this.alldata.project[i];
+      for (let i = 0; i < this.userData.project.length; i++) {
+        let e = this.userData.project[i];
         if (e.pname == this.taskForm.value.pname) {
           e.task?.push(task);
           nTask = true;
@@ -77,10 +77,10 @@ export class IssueDetailsComponent implements OnInit {
       }
 
       if (!nTask) {
-        this.alldata.project.push(project);
+        this.userData.project.push(project);
       }
       // for (let i = 0; i < this.allDetails.project.length; i++) {
-      //   let e = this.alldata.project[i];
+      //   let e = this.userData.project[i];
       //   if (e.pname == this.taskForm.value.pname) {
       //     e.project?.push(project);
       //     nTask = true;
@@ -89,19 +89,23 @@ export class IssueDetailsComponent implements OnInit {
 
       localStorage.setItem('prince', JSON.stringify(this.allDetails));
 
-      console.log(this.alldata.project);
+      console.log(this.userData.project);
+
+      
+    this.data = JSON.parse(JSON.stringify(this.userData.project)); // copy
     }
   }
   result: any;
   onSelectChange(e: any) {
     // let i:any
-    this.data = JSON.parse(JSON.stringify(this.alldata.project));
+    // for fresh
+    this.data = JSON.parse(JSON.stringify(this.userData.project));
     let prince = e.target.value;
 
     if (prince != 'all') {
       let d: any[] = this.data;
 
-      d.forEach((pr: any) => {
+      this.data.forEach((pr: any) => {
         let ta: any[] = [];
         pr.task.forEach((t: any) => {
           if (t.priority === prince) {
@@ -112,7 +116,7 @@ export class IssueDetailsComponent implements OnInit {
         });
         pr.task = ta;
       });
-      this.data = d;
+      // this.data = d;
     }
   }
 }

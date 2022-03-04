@@ -3,19 +3,19 @@
     <div class="row">
       <div class="col-md-3 text-center">
         <h4>Employee Id</h4>
-        <p>{{ alldata.id }}</p>
+        <p>{{ userData.id }}</p>
       </div>
       <div class="col-md-3 text-center">
         <h4>Name</h4>
-        <p>{{ alldata.eName }}</p>
+        <p>{{ userData.eName }}</p>
       </div>
       <div class="col-md-3 text-center">
         <h4>Designation</h4>
-        <p>{{ alldata.desg }}</p>
+        <p>{{ userData.desg }}</p>
       </div>
       <div class="col-md-3 text-center">
         <h4>Work Location</h4>
-        <p>{{ alldata.wLocation }}</p>
+        <p>{{ userData.wLocation }}</p>
       </div>
     </div>
     <hr />
@@ -41,7 +41,7 @@
           </select>
         </div>
       </div>
-      <div class="col-md-12" *ngFor="let project of alldata.project">
+      <div class="col-md-12" *ngFor="let project of data">
         <div class="col-md-8">
           <h5>Project Name</h5>
           <p class="fw-bold">{{ project.pname }}</p>
